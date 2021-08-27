@@ -1,20 +1,7 @@
-import pytest
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-    
-def pytest_addoption(parser):
-    parser.addoption('--language', action='store', default='ru',
-                     help="Choose language")
+from pages.base_page import BasePage
+from selenium.webdriver.common.by import By
 
-
-@pytest.fixture(scope="function")
-def browser(request):
-    user_language = request.config.getoption("language")
-    options = Options()
-    options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
-    browser = webdriver.Chrome(options=options)
-    print("\nstart browser for test..")
-    browser.implicitly_wait(10)
-    yield browser
-    print("\nquit browser..")
-    browser.quit()
+class MainPage(BasePage): 
+    def go_to_login_page(self):
+        login_link = self.browser.find_element(By.CSS_SELECTOR, "#login_link")
+        login_link.click()
