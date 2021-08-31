@@ -1,4 +1,5 @@
 from pages.locators import LoginPageLocators
+from pages.base_page import BasePage
 
 class LoginPage(BasePage):
     def should_be_login_page(self):
@@ -8,8 +9,7 @@ class LoginPage(BasePage):
 
     def should_be_login_url(self):
         # реализуйте проверку на корректный url адрес
-        correct_link = "http://selenium1py.pythonanywhere.com/ru/accounts"
-        assert browser.current_url == correct_link, "URL is not correct"
+        assert "login" in self.browser.current_url, "URL is not correct"
         
     def should_be_login_form(self):
         # реализуйте проверку, что есть форма логина
